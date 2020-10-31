@@ -9,19 +9,20 @@ jobs:
     steps:
       - setup_remote_docker
       - checkout
-      - run:
-          name: "Pull Submodules"
-          command: |
-            git submodule init
-            git submodule update --remote
-            git pull --recurse-submodules
       - docker/check
       - run:
           command: |
-            cd ./bl_iot_sdk && \
-            ls -la && \
-            docker run -v $(pwd)/bl_iot_sdk:/opt/sdk suculent/bl_iot_sdk-ubuntu:latest bash -c 'cd /opt/sdk/ && ls -la'
-#  && cd ./customer_app/bl602_boot2_mini && make
+            docker run suculent/bl_iot_sdk-ubuntu:latest bash -c 'cd /opt/sdk/ && ls -la && cd ./customer_app/${CIRCLE_JOB} && make'
+
+  sdk_app_timer:
+    executor: docker/docker
+    steps:
+      - setup_remote_docker
+      - checkout
+      - docker/check
+      - run:
+          command: |
+            docker run suculent/bl_iot_sdk-ubuntu:latest bash -c 'cd /opt/sdk/ && ls -la && cd ./customer_app/${CIRCLE_JOB} && make'
 
 #
 # WORKFLOWS
@@ -31,11 +32,13 @@ workflows:
   version: 2
   build:
     jobs:
+
+    # - benchmark_security_aes
+
       - bl602_boot2_mini:
           context:
             - dockerhub
-
-      # - benchmark_security_aes
+      
       # - bl602_boot2
       # - bl602_demo_at
       # - bl602_demo_event
@@ -62,6 +65,15 @@ workflows:
       # - sdk_app_mdns
       # - sdk_app_pwm
       # - sdk_app_romfs
-      # - sdk_app_timer
-      # - sdk_app_uart_ctl
-      # - sdk_app_uart_echo
+      
+      - sdk_app_timer:
+          context:
+            - dockerhub
+
+      - sdk_app_uart_ctl:
+          context:
+            - dockerhub
+
+      - sdk_app_uart_echo:
+          context:
+            - dockerhub

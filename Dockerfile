@@ -9,6 +9,6 @@ ENV CONFIG_CHIP_NAME=BL602
 RUN apt-get update -qq && \
 apt-get install -y build-essential
 
-VOLUME /opt/sdk
+COPY ./bl_iot_sdk /opt/sdk
 
 RUN cd /opt/sdk && ls -la
