@@ -18,7 +18,6 @@ jobs:
       - docker/check
       - run:
           command: |
-            git clone https://github.com/pine64/bl_iot_sdk && \
             cd ./bl_iot_sdk && \
             ls -la && \
             docker run -v $(pwd)/bl_iot_sdk:/opt/sdk suculent/bl_iot_sdk-ubuntu:latest bash -c 'cd /opt/sdk/ && ls -la'
