@@ -19,7 +19,7 @@ jobs:
           command: |
             ls -la && \
             cd ./bl_iot_sdk && \
-            docker run -v $(pwd)/bl_iot_sdk:/opt/sdk suculent/bl_iot_sdk-ubuntu:latest bash -c 'cd /opt/sdk/customer_app/bl602_boot2_mini && make'
+            docker run -v $(pwd)/bl_iot_sdk:/opt/sdk suculent/bl_iot_sdk-ubuntu:latest bash -c 'ls -la && cd /opt/sdk/ && ls && cd ./bl_iot_sdk/customer_app/bl602_boot2_mini && make'
 
 #
 # WORKFLOWS
