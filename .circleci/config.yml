@@ -14,6 +14,70 @@ jobs:
           command: |
             docker run suculent/bl_iot_sdk-ubuntu:latest bash -c 'cd /opt/sdk/ && ls -la && cd ./customer_app/${CIRCLE_JOB} && make'
 
+  bl602_boot2:
+    executor: docker/docker
+    steps:
+      - setup_remote_docker
+      - checkout
+      - docker/check
+      - run:
+          command: |
+            docker run suculent/bl_iot_sdk-ubuntu:latest bash -c 'cd /opt/sdk/ && ls -la && cd ./customer_app/${CIRCLE_JOB} && make'
+
+  bl602_demo_at:
+    executor: docker/docker
+    steps:
+      - setup_remote_docker
+      - checkout
+      - docker/check
+      - run:
+          command: |
+            docker run suculent/bl_iot_sdk-ubuntu:latest bash -c 'cd /opt/sdk/ && ls -la && cd ./customer_app/${CIRCLE_JOB} && make'
+
+  bl602_demo_event:
+    executor: docker/docker
+    steps:
+      - setup_remote_docker
+      - checkout
+      - docker/check
+      - run:
+          command: |
+            docker run suculent/bl_iot_sdk-ubuntu:latest bash -c 'cd /opt/sdk/ && ls -la && cd ./customer_app/${CIRCLE_JOB} && make'
+
+  bl602_demo_nano:
+    executor: docker/docker
+    steps:
+      - setup_remote_docker
+      - checkout
+      - docker/check
+      - run:
+          command: |
+            docker run suculent/bl_iot_sdk-ubuntu:latest bash -c 'cd /opt/sdk/ && ls -la && cd ./customer_app/${CIRCLE_JOB} && make'
+
+  bl602_demo_noconnectivity:
+    executor: docker/docker
+    steps:
+      - setup_remote_docker
+      - checkout
+      - docker/check
+      - run:
+          command: |
+            docker run suculent/bl_iot_sdk-ubuntu:latest bash -c 'cd /opt/sdk/ && ls -la && cd ./customer_app/${CIRCLE_JOB} && make'
+
+  bl602_demo_wifi:
+    executor: docker/docker
+    steps:
+      - setup_remote_docker
+      - checkout
+      - docker/check
+      - run:
+          command: |
+            docker run suculent/bl_iot_sdk-ubuntu:latest bash -c 'cd /opt/sdk/ && ls -la && cd ./customer_app/${CIRCLE_JOB} && make'
+
+  # - 
+  # - 
+  # - 
+
   sdk_app_timer:
     executor: docker/docker
     steps:
@@ -23,6 +87,57 @@ jobs:
       - run:
           command: |
             docker run suculent/bl_iot_sdk-ubuntu:latest bash -c 'cd /opt/sdk/ && ls -la && cd ./customer_app/${CIRCLE_JOB} && make'
+
+  sdk_app_uart_ctl:
+    executor: docker/docker
+    steps:
+      - setup_remote_docker
+      - checkout
+      - docker/check
+      - run:
+          command: |
+            docker run suculent/bl_iot_sdk-ubuntu:latest bash -c 'cd /opt/sdk/ && ls -la && cd ./customer_app/${CIRCLE_JOB} && make'
+
+  sdk_app_uart_echo:
+    executor: docker/docker
+    steps:
+      - setup_remote_docker
+      - checkout
+      - docker/check
+      - run:
+          command: |
+            docker run suculent/bl_iot_sdk-ubuntu:latest bash -c 'cd /opt/sdk/ && ls -la && cd ./customer_app/${CIRCLE_JOB} && make'
+
+  sdk_app_uart_time:
+    executor: docker/docker
+    steps:
+      - setup_remote_docker
+      - checkout
+      - docker/check
+      - run:
+          command: |
+            docker run suculent/bl_iot_sdk-ubuntu:latest bash -c 'cd /opt/sdk/ && ls -la && cd ./customer_app/${CIRCLE_JOB} && make'
+
+      # - sdk_app_audio_udp
+      # - sdk_app_ble_sync
+      # - sdk_app_blog
+      # - sdk_app_cli
+      # - sdk_app_cronalarm
+      # - sdk_app_dac
+      # - sdk_app_easyflash
+      # - sdk_app_event
+      # - sdk_app_fdt
+      # - sdk_app_gpio
+      # - sdk_app_hbnram
+      # - sdk_app_heap
+      # - sdk_app_helloworld
+      # - sdk_app_http_client_socket
+      # - sdk_app_http_client_tcp
+      # - sdk_app_i2c
+      # - sdk_app_ir
+      # - sdk_app_mdns
+      # - sdk_app_pwm
+      # - sdk_app_romfs
 
 #
 # WORKFLOWS
@@ -38,13 +153,31 @@ workflows:
       - bl602_boot2_mini:
           context:
             - dockerhub
-      
-      # - bl602_boot2
-      # - bl602_demo_at
-      # - bl602_demo_event
-      # - bl602_demo_nano
-      # - bl602_demo_noconnectivity
-      # - bl602_demo_wifi
+
+      - bl602_boot2:
+          context:
+            - dockerhub
+
+      - bl602_demo_at:
+          context:
+            - dockerhub
+
+      - bl602_demo_event:
+          context:
+            - dockerhub
+
+      - bl602_demo_nano:
+          context:
+            - dockerhub
+
+      - bl602_demo_noconnectivity:
+          context:
+            - dockerhub
+
+      - bl602_demo_wifi:
+          context:
+            - dockerhub
+            
       # - sdk_app_audio_udp
       # - sdk_app_ble_sync
       # - sdk_app_blog
@@ -70,10 +203,14 @@ workflows:
           context:
             - dockerhub
 
-      #- sdk_app_uart_ctl:
-      #    context:
-      #      - dockerhub
+      - sdk_app_uart_ctl:
+          context:
+            - dockerhub
 
-      #- sdk_app_uart_echo:
-      #    context:
-      #      - dockerhub
+      - sdk_app_uart_echo:
+          context:
+            - dockerhub
+
+      - sdk_app_uart_time:
+          context:
+            - dockerhub
