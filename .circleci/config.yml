@@ -70,10 +70,10 @@ workflows:
           context:
             - dockerhub
 
-      - sdk_app_uart_ctl:
-          context:
-            - dockerhub
+      #- sdk_app_uart_ctl:
+      #    context:
+      #      - dockerhub
 
-      - sdk_app_uart_echo:
-          context:
-            - dockerhub
+      #- sdk_app_uart_echo:
+      #    context:
+      #      - dockerhub
