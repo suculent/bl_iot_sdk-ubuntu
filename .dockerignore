@@ -1,0 +1,3 @@
+.git/
+bl_iot_sdk/.git/
+bl_iot_sdk/toolchain/riscv/Darwin
