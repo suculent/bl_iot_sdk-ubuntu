@@ -22,7 +22,10 @@ workflows:
   version: 2
   build:
     jobs:
-      - bl602_boot2_mini
+      - bl602_boot2_mini:
+          context:
+            - dockerhub
+
       # - benchmark_security_aes
       # - bl602_boot2
       # - bl602_demo_at
