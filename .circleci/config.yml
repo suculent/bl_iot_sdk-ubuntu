@@ -9,10 +9,15 @@ jobs:
     steps:
       - setup_remote_docker
       - checkout
+      - run:
+          name: "Pull Submodules"
+          command: |
+            git submodule init
+            git submodule update --remote
       - docker/check
       - run:
           command: |
-            docker run -v $(pwd)/bl_iot_sdk/:/opt/sdk suculent/bl_iot_sdk-ubuntu:latest cd /opt/sdk/customer_app/bl602_boot2_mini && make
+            docker run -v $(pwd)/bl_iot_sdk:/opt/sdk suculent/bl_iot_sdk-ubuntu:latest cd /opt/sdk/customer_app/bl602_boot2_mini && make
 
 #
 # WORKFLOWS
