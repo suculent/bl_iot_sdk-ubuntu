@@ -17,7 +17,9 @@ jobs:
       - docker/check
       - run:
           command: |
-            docker run -v $(pwd)/bl_iot_sdk:/opt/sdk suculent/bl_iot_sdk-ubuntu:latest cd /opt/sdk/customer_app/bl602_boot2_mini && make
+            ls -la && \
+            cd /opt/sdk && \
+            docker run -v $(pwd)/bl_iot_sdk:/opt/sdk suculent/bl_iot_sdk-ubuntu:latest bash -c 'cd /opt/sdk/customer_app/bl602_boot2_mini && make'
 
 #
 # WORKFLOWS
