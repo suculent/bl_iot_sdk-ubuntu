@@ -1,0 +1,55 @@
+version: 2.1
+orbs:
+  docker: circleci/docker@1.5.0
+
+jobs:
+
+  bl602_boot2_mini:
+    executor: docker/docker
+    steps:
+      - setup_remote_docker
+      - checkout
+      - docker/check
+      - run:
+          command: |
+            docker run -v $(pwd)/bl_iot_sdk/:/opt/sdk suculent/bl_iot_sdk-ubuntu:latest cd /opt/sdk/customer_app/bl602_boot2_mini && make
+
+#
+# WORKFLOWS
+#
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - bl602_boot2_mini
+      # - benchmark_security_aes
+      # - bl602_boot2
+      # - bl602_demo_at
+      # - bl602_demo_event
+      # - bl602_demo_nano
+      # - bl602_demo_noconnectivity
+      # - bl602_demo_wifi
+      # - sdk_app_audio_udp
+      # - sdk_app_ble_sync
+      # - sdk_app_blog
+      # - sdk_app_cli
+      # - sdk_app_cronalarm
+      # - sdk_app_dac
+      # - sdk_app_easyflash
+      # - sdk_app_event
+      # - sdk_app_fdt
+      # - sdk_app_gpio
+      # - sdk_app_hbnram
+      # - sdk_app_heap
+      # - sdk_app_helloworld
+      # - sdk_app_http_client_socket
+      # - sdk_app_http_client_tcp
+      # - sdk_app_i2c
+      # - sdk_app_ir
+      # - sdk_app_mdns
+      # - sdk_app_pwm
+      # - sdk_app_romfs
+      # - sdk_app_timer
+      # - sdk_app_uart_ctl
+      # - sdk_app_uart_echo
